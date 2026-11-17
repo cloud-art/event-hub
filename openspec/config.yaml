@@ -1,0 +1,37 @@
+schema: spec-driven
+
+context: |
+  Language: Russian
+  All artifacts must be written in Russian.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  EventHub: Bitrix owns event content; Symfony owns registrations, seats,
+  payments and permissions; Next.js uses Symfony API.
+  Required stack: PHP 8.5, Symfony 8.1, PostgreSQL, Next.js 16, TypeScript, Tailwind.
+  Current repository is a WIP scaffold, not an implemented product.
+  Read docs/product/requirements.md for requirement IDs and
+  docs/product/open-questions.md for unresolved product decisions.
+  Read docs/domain/invariants.md before changing registration or payment flows.
+  External doubles are in a separate ignored product-test repository.
+  Do not assume they are delivered by cloning the root repository.
+  Planning answers INT-001 through INT-096 are in docs/product/planning-interview.md.
+  They are approved by Kirill for planning only, NOT approved by the customer.
+  Follow docs/product/approval-workflow.md; money and access rules require
+  written customer agreement before implementing the affected behavior.
+  Current handoff and pending work: docs/delivery/next-session.md.
+  Planning scope includes mobile authentication now and centrally evaluated
+  Unleash flags in Symfony; client applications consume evaluated results.
+
+rules:
+  proposal:
+    - Reference affected requirement IDs from docs/product/requirements.md.
+    - State scope and unresolved questions; distinguish decisions from assumptions.
+  specs:
+    - Write observable acceptance scenarios; link requirements to product requirement IDs.
+    - Cover concurrency, duplicate delivery and unknown timeout outcomes when relevant.
+  design:
+    - Explain meaningful alternatives, transaction boundaries and failure recovery when relevant.
+    - Do not silently decide unresolved product questions.
+  tasks:
+    - Include implementation and relevant verification tasks.
+    - Mark a task complete only after the work and its required checks have actually completed.
