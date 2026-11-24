@@ -1,0 +1,8 @@
+events:
+    path: /api/v1/events
+    controller: App\EventController::catalog
+    methods: [GET]
+event:
+    path: /api/v1/events/{id}
+    controller: App\EventController::detail
+    methods: [GET]

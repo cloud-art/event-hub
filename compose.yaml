@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: eventhub
+      POSTGRES_USER: eventhub
+      POSTGRES_PASSWORD: eventhub-local
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  api:
+    build: apps/api
+    environment:
+      APP_ENV: local
+      CONTENT_SOURCE: mock
+      DB_DSN: pgsql:host=db;dbname=eventhub
+      DB_USER: eventhub
+      DB_PASSWORD: eventhub-local
+    ports:
+      - "127.0.0.1:${API_PORT:-8080}:8080"
+  web:
+    build: apps/web
+    environment:
+      API_BASE_URL: http://api:8080
+    ports:
+      - "127.0.0.1:${WEB_PORT:-3000}:3000"
+  source:
+    image: nginx:alpine
+    volumes:
+      - ./infra/source:/usr/share/nginx/html:ro
+volumes:
+  postgres:

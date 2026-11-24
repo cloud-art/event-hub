@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root { --ink: #182821; --muted: #45554a; --line: #cbd3ce; --accent: #006649; }
+body { margin: 0; color: var(--ink); background: #fcfdfc; font: 1rem/1.55 system-ui, sans-serif; }
+header { border-bottom: 1px solid var(--line); padding: 1rem max(1.25rem, calc((100% - 60rem)/2)); }
+header a { color: var(--ink); text-decoration: none; font-size: 1.5rem; font-weight: 750; }
+main { max-width: 62.5rem; margin: 3rem auto; padding: 0 1.25rem; overflow-wrap: anywhere; }
+h1 { font-size: 2.5rem; line-height: 1.15; margin: 1rem 0 2rem; font-weight: 700; }
+h2 { font-size: 1.5rem; line-height: 1.25; margin: 1.5rem 0 .5rem; font-weight: 650; }
+p { margin: .5rem 0; }
+a { color: var(--accent); text-underline-offset: .18em; }
+a:focus-visible { outline: 3px solid #af4700; outline-offset: 3px; }
+ol, ul { padding-left: 1.5rem; list-style: revert; }
+.catalog { padding: 0; list-style: none; border-top: 2px solid var(--ink); }
+.catalog li { display: grid; grid-template-columns: 15rem 1fr; gap: 1.25rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.catalog span { display: block; color: var(--muted); font-size: .875rem; }
+.catalog h2 { margin: 0; }
+@media (max-width: 40rem) {
+  main { margin: 2rem auto; }
+  h1 { font-size: 2rem; }
+  .catalog li { grid-template-columns: 1fr; gap: .5rem; }
+}

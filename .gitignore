@@ -1,1 +1,6 @@
 product-test
+apps/api/vendor/
+apps/api/var/
+apps/web/node_modules/
+apps/web/.next/
+apps/web/*.tsbuildinfo
