@@ -20,6 +20,8 @@ services:
       - "127.0.0.1:${BITRIX_PORT:-8182}:8080"
     volumes:
       - www:/www
+      - ./local/modules/eventhub.content:/www/local/modules/eventhub.content:ro
+      - ../../infra/source/events.json:/dist/events.json:ro
       - ./.local/business_encode.tar.gz:/dist/business_encode.tar.gz:ro
     depends_on:
       db: {condition: service_healthy}

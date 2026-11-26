@@ -25,6 +25,11 @@ bitrix-up:
 	$(BX) build cms wizard
 	$(BX) up -d --wait --wait-timeout 180 db cms
 	$(BX) run --rm --no-deps wizard install
+	$(MAKE) bitrix-seed
+
+.PHONY: bitrix-seed
+bitrix-seed:
+	$(BX) exec -T cms php83 -d short_open_tag=On /www/local/modules/eventhub.content/seed.php
 
 bitrix-check:
 	$(BX) run --rm --no-deps wizard check
