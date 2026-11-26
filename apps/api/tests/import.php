@@ -1,6 +1,7 @@
 <?php
 
 use App\Content\EventProjection;
+use App\Content\EventBatch;
 use App\Content\LocalEventSource;
 
 require dirname(__DIR__).'/vendor/autoload.php';
@@ -22,7 +23,7 @@ $invalid = array_values($batch);
 $invalid[0]['title'] = 'Не сохранять';
 $invalid[1]['program'] = null;
 try {
-    $projection->import(LocalEventSource::parse(json_encode($invalid, JSON_THROW_ON_ERROR)));
+    $projection->import(EventBatch::parse(json_encode($invalid, JSON_THROW_ON_ERROR)));
     throw new RuntimeException('Ошибка партии не обнаружена.');
 } catch (UnexpectedValueException) {
     assert($projection->find('print-studio')['title'] === 'Новое название');

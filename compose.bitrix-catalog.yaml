@@ -1,0 +1,15 @@
+services:
+  api:
+    environment:
+      CONTENT_SOURCE: bitrix
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eventhub -d eventhub"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  source:
+    profiles: [mock]

@@ -1,8 +1,8 @@
 <?php
 
-use App\Content\LocalEventSource;
+use App\Content\EventBatch;
 
-require dirname(__DIR__, 2).'/api/src/Content/LocalEventSource.php';
+require dirname(__DIR__, 2).'/api/src/Content/EventBatch.php';
 $_SERVER['DOCUMENT_ROOT'] = '/www';
 require '/www/bitrix/modules/main/include/prolog_before.php';
 \Bitrix\Main\Loader::includeModule('iblock');
@@ -12,7 +12,7 @@ function readExport(): array
     ob_start();
     require '/www/local/modules/eventhub.content/export.php';
     $body = ob_get_clean();
-    $batch = LocalEventSource::parse($body);
+    $batch = EventBatch::parse($body);
     foreach (json_decode($body, true, flags: JSON_THROW_ON_ERROR) as $row) {
         if ($row !== $batch[$row['id']]) {
             throw new RuntimeException('Выдача содержит поля вне контракта каталога.');

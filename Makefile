@@ -38,5 +38,14 @@ bitrix-export:
 bitrix-check:
 	$(BX) run --rm --no-deps wizard check
 
+BX_CATALOG := API_PORT=$${BITRIX_API_PORT:-8180} WEB_PORT=$${BITRIX_WEB_PORT:-3180} $(COMPOSE) -p eventhub-bitrix-catalog -f compose.yaml -f compose.bitrix-catalog.yaml
+.PHONY: bitrix-import
+bitrix-import:
+	@set -eu; batch=$$(mktemp); trap 'rm -f "$$batch"' EXIT; \
+		timeout 30 $(MAKE) -s --no-print-directory bitrix-export > "$$batch"; \
+		$(BX_CATALOG) up -d --build --wait --wait-timeout 90 db api; \
+		$(BX_CATALOG) exec -T api php bin/prepare.php < "$$batch"
+
 bitrix-down:
+	$(BX_CATALOG) down
 	$(BX) down
