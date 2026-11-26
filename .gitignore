@@ -4,3 +4,4 @@ apps/api/var/
 apps/web/node_modules/
 apps/web/.next/
 apps/web/*.tsbuildinfo
+apps/bitrix/.local/

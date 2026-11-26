@@ -17,3 +17,17 @@ check:
 
 down:
 	$(COMPOSE) down
+
+BX := $(COMPOSE) -p eventhub-bitrix --env-file apps/bitrix/.local/settings.env -f apps/bitrix/compose.yaml
+.PHONY: bitrix-up bitrix-check bitrix-down
+bitrix-up:
+	@sh apps/bitrix/bootstrap.sh
+	$(BX) build cms wizard
+	$(BX) up -d --wait --wait-timeout 180 db cms
+	$(BX) run --rm --no-deps wizard install
+
+bitrix-check:
+	$(BX) run --rm --no-deps wizard check
+
+bitrix-down:
+	$(BX) down
