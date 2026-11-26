@@ -31,6 +31,10 @@ bitrix-up:
 bitrix-seed:
 	$(BX) exec -T cms php83 -d short_open_tag=On /www/local/modules/eventhub.content/seed.php
 
+.PHONY: bitrix-export
+bitrix-export:
+	@$(BX) exec -T cms php83 -d short_open_tag=On /www/local/modules/eventhub.content/export.php
+
 bitrix-check:
 	$(BX) run --rm --no-deps wizard check
 
